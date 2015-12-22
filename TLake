@@ -1,0 +1,89 @@
+#include <stdio.h> // Стандартная библиотека для ввода-вывода
+#include <dirent.h> // Библиотека работы с директориями
+#include <string.h>
+
+// Можно наделать таких блоков для каждого варианта,
+// и потом переключать значения макроса ENCODE_CRUFT
+
+    #define AP_L 224 //ПРОВЕРИТЬ
+    #define AP_R 255
+    #define CAPS_L 192
+    #define CAPS_R 223
+    #define AP_JO 184
+    #define CAPS_JO 168
+
+/*  Заклинания
+    Создаём переменные, необходимые для работы с библиотеками
+*/
+DIR *dir;
+struct dirent *ent;
+
+/*  Функция, которая обрабатывает файл */
+void filework (char *filename, int p[32])
+{
+    int i;
+    FILE *qwero;
+    qwero=fopen("C:\\qwero.txt", "w");
+    fprintf(qwero, "%s\n", "hello");
+    char newfilename[80]; //  это для работы с текстовым файлом
+    strcpy(newfilename, "C:\\qwer\\");
+    strcat(newfilename, filename); // задаем имя файла, скоторым будем работать
+    int c; // В эту переменную будут писаться символы из файла
+    FILE *ff; // Это переменная для файла
+    if (filename[0] != '.') // Игнорируем файлы, которые начинаются с точки
+    {
+        ff = fopen (newfilename, "r"); //Открываем файл для чтения
+        while (( c = fgetc ( ff )) != EOF)  // Читаем символы по одному
+        {
+              if (c>=AP_L && c <=AP_R) /* а-я */
+        {
+            c-=AP_L;
+            p[c]++;
+            //printf("%d\n",p[c]);
+        }
+                if (c>=CAPS_L && c<= CAPS_R) /* А-Я */
+        {
+            c-=CAPS_L;
+            p[c]++;
+            //printf("%d\n", p[c]);
+        }
+                if (c==AP_JO || c==CAPS_JO)
+
+            p[5]++;
+            //printf("%d\n", p[c]);
+        }
+        printf("1\n");
+        fclose (ff); // Когда прочитали все символы, закрываем файл
+    }
+    for (i=0; i<=31; i++)
+    fprintf(qwero, "%d\n", p[i]);
+        fclose(qwero);
+}
+
+int main()
+{
+int p[32];
+
+    int i;
+    for (i=0; i<=33; i++)
+    {
+        p[i]=0;
+    }
+    if ((dir = opendir ("C:\\qwer")) == NULL) // Открываем директорию.
+    {
+        printf ("Error while opening directory"); //Если директория не нашлась, пишем сообщение об ошибке.
+        return 1;
+    }
+    else //Если всё хорошо, идём дальше
+    {
+        while ((ent = readdir (dir)) != NULL) //Читаем следующее имя файла в директории. Оно будет равно NULL, если файлы закончиились.
+        {
+        /*  *ent).d_name или ent -> d_name это функция, которая возвращает строку, в которой записано имя файла.
+            Эту строку мы передаём нашей функции, filework
+        */
+            filework ((*ent).d_name, p);
+        }
+        closedir (dir); //Когда все файлы обработаны, закрываем директорию.
+/*        printf ("Done!\n"); //Пишем что-нибудь на прощание.*/
+    }
+}
