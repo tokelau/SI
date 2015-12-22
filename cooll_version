@@ -11,6 +11,8 @@
     #define AP_R 255
     #define CAPS_L 192
     #define CAPS_R 223
+    #define AP_JO 184
+    #define CAPS_JO 168
 
 
 /*  Заклинания
