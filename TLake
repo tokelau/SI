@@ -19,7 +19,7 @@ DIR *dir;
 struct dirent *ent;
 
 /*  Функция, которая обрабатывает файл */
-void filework (char *filename, int p[32])
+void filework (char *filename, int p[33])
 {
     int i;
     FILE *qwero;
@@ -37,35 +37,40 @@ void filework (char *filename, int p[32])
         {
               if (c>=AP_L && c <=AP_R) /* а-я */
         {
+            p[32]++;//в общицй счетчик
             c-=AP_L;
             p[c]++;
             //printf("%d\n",p[c]);
         }
                 if (c>=CAPS_L && c<= CAPS_R) /* А-Я */
         {
+            p[32]++; //в общицй счетчик
             c-=CAPS_L;
             p[c]++;
             //printf("%d\n", p[c]);
         }
                 if (c==AP_JO || c==CAPS_JO)
-
-            p[5]++;
+                {
+                    p[32]++;//в общицй счетчик
+                    p[5]++;
             //printf("%d\n", p[c]);
+                }
+
         }
         printf("1\n");
         fclose (ff); // Когда прочитали все символы, закрываем файл
     }
-    for (i=0; i<=31; i++)
+    for (i=0; i<=32; i++)
     fprintf(qwero, "%d\n", p[i]);
         fclose(qwero);
 }
 
 int main()
 {
-int p[32];
+int p[33];
 
     int i;
-    for (i=0; i<=33; i++)
+    for (i=0; i<=32; i++)
     {
         p[i]=0;
     }
