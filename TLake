@@ -5,7 +5,7 @@
 // Можно наделать таких блоков для каждого варианта,
 // и потом переключать значения макроса ENCODE_CRUFT
 
-    #define AP_L 224 //ПРОВЕРИТЬ
+    #define AP_L 224
     #define AP_R 255
     #define CAPS_L 192
     #define CAPS_R 223
@@ -26,7 +26,7 @@ void filework (char *filename, int p[33])
     for (i=0; i<=32; i++)
         y[i]=0;
     FILE *qwero1;
-    qwero1=fopen("C:\\qwero1.txt", "w");
+    qwero1=fopen("C:\\qwero1.txt", "a");
     FILE *qwero;
     qwero=fopen("C:\\qwero.txt", "w");
     fprintf(qwero, "%s\n", "hello");
@@ -70,8 +70,7 @@ void filework (char *filename, int p[33])
         }
         printf("1\n");
         fclose (ff); // Когда прочитали все символы, закрываем файл
-    }
-    /*расфасовываем массив, который на один файл*/
+         /*расфасовываем массив, который на один файл*/
      c=y[0];//расфасовать согласно базовым данным
     y[0]=y[14];
     y[14]=y[19];
@@ -107,8 +106,10 @@ void filework (char *filename, int p[33])
     y[23]=c;
         for(i=0; i<=32; i++)
             fprintf(qwero1, "%d\n", y[i]);
-            fprintf(qwero1,"%d\n" " ");
+            fprintf(qwero1,"\n");
             fclose(qwero1);
+    }
+
     c=p[0];//расфасовать согласно базовым данным
     p[0]=p[14];
     p[14]=p[19];
