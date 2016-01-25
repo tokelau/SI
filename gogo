@@ -1,0 +1,35 @@
+#include <stdio.h>
+#include <string.h>
+
+    #define AP_L 224
+    #define AP_R 255
+    #define CAPS_L 192
+    #define CAPS_R 223
+    #define AP_JO 184
+    #define CAPS_JO 168
+
+main()
+{
+    int c;
+    char cc;
+    FILE *qwer;
+    qwer=fopen("C:\\txt.cp1251.all", "r");
+    FILE *qwero;
+    qwero=fopen("C:\\qwero1.txt", "w");
+     while ((c=fgetc(qwer)) != EOF)
+     {
+         if (c>=AP_L && c <=AP_R) /* а-я */
+        {
+            fputc(c, qwero);
+        }
+        if (c>=CAPS_L && c<= CAPS_R) /* А-Я */
+        {
+            fputc(c, qwero);
+        }
+        if (c==AP_JO || c==CAPS_JO)
+        {
+            fputc(c, qwero);
+        }
+     }
+     printf("1\n");
+}
