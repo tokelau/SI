@@ -106,10 +106,14 @@ void filework (char *filename)
         m=p[21];
     p[21]=p[23];
     p[23]=m;
-
-    for (i=0; i<=32; i++)
-    fprintf(qwero, "%f\n", p[i]);
-    fclose(qwero);
+/*высчитвыаем среднее для кадой буквы*/
+    float pp[32];
+    int j;
+    for (j=0;j<=33;j++)
+    {
+        pp[j]=p[j]/p[32];
+        fprintf(qwero, "%f\n", pp[j]);
+    }
     /*
 
 
@@ -125,7 +129,7 @@ void filework (char *filename)
         ff = fopen (newfilename, "r"); //Открываем файл для чтения
         while (( c = fgetc ( ff )) != EOF)  // Читаем символы по одному
         {
-            printf("Oh! A symbol!\n");
+           // printf("Oh! A symbol!\n");
             if (c>=AP_L && c <=AP_R) /* а-я */
             {
                 c-=AP_L;
@@ -148,14 +152,7 @@ void filework (char *filename)
             }
         }
         fclose (ff); // Когда прочитали все символы, закрываем файл
-            /*высчитвыаем среднее для кадой буквы*/
-    float pp[32];
-    int j;
-    for (j=0;j<33;j++)
-    {
-        pp[j]=p[j]/p[32];
-        fprintf(qwero1, "%f\n", pp[j]);
-    }
+
      /*расфасовываем массив, который на один файл*/
     m=y[0];//расфасовать согласно базовым данным
     y[0]=y[14];
@@ -195,7 +192,7 @@ void filework (char *filename)
         for (i=0; i<=31; i++)
         {
             csr[i]=csr[i]+(y[i]-pp[i])*(y[i]-pp[i]);
-            printf("avg: %f\n", csr[i]);
+           // printf("avg: %f\n", csr[i]);
         }
         for (i=0; i<=31; i++)
         {
