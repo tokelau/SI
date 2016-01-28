@@ -1,3 +1,4 @@
+
 #include <stdio.h> // Стандартная библиотека для ввода-вывода
 #include <dirent.h> // Библиотека работы с директориями
 #include <string.h>
@@ -36,6 +37,7 @@ void filework (char *filename, float n)
         y[i]=0;
     FILE *qwero1;
     qwero1=fopen("C:\\qwero1.txt", "a");
+    //fprintf(qwero1, "132");
     FILE *qwero;
     qwero=fopen("C:\\qwero.txt", "w");
     fprintf(qwero, "%s\n", "hello");
@@ -70,7 +72,7 @@ void filework (char *filename, float n)
                 }
         }
         //printf("File processed!\n");
-        k++;
+        //k++;
     }
     m=p[0];//расфасовать согласно базовым данным
     p[0]=p[14];
@@ -105,14 +107,11 @@ void filework (char *filename, float n)
         m=p[21];
     p[21]=p[23];
     p[23]=m;
-/*высчитвыаем среднее для кадой буквы*/
-    float pp[32];
-    int j;
-    for (j=0;j<=33;j++)
-    {
-        pp[j]=p[j]/p[32];
-        fprintf(qwero, "%f\n", pp[j]);
-    }
+for (i=0; i<=32; i++)
+{
+    //printf("%f\n", p[i]);
+}
+
     /*
 
 
@@ -190,21 +189,39 @@ void filework (char *filename, float n)
         m=y[21];
     y[21]=y[23];
     y[23]=m;
-
-    /*for (i=0; i<=31; i++)
+    for (i=0; i<=31; i++)
+{
+    csr[i]=0;
+}
+/*высчитвыаем среднее для кадой буквы*/
+    float pp[33];
+    int j;
+    for (j=0;j<=31;j++)
     {
-        y[i]=y[i]/y[32];
-    }*/
+        pp[j]=p[j]/p[32];
+        fprintf(qwero, "%f\n", pp[j]);
+    }
+    for (i=0; i<=31; i++)
+    {
+        if (y[i] !=0)
+        {
+         y[i]=y[i]/y[32];
+
+        }
+        //printf("avg: %f\n", y[i]);
+    }
     /*среднее квадратичное для каждого файла*/
         for (i=0; i<=31; i++)
         {
-            csr[i]=csr[i]+(y[i]-pp[i])*(y[i]-pp[i]);
-           // printf("avg: %f\n", csr[i]);
+            csr[i]=csr[i]+((y[i]-pp[i])*(y[i]-pp[i]));
+            //printf("avg: %f\n", csr[i]);
         }
         for (i=0; i<=31; i++)
         {
+            printf("jj");
+            //fprintf(qwero1, "f\n");
             csr[i]=csr[i]/n;
-            //fprintf(qwero1, "%f\n", csr[i]);
+           // fprintf(qwero1, "%f\n", csr[i]);
         }
         for (i=0; i<=31; i++)
         {
@@ -299,3 +316,4 @@ void main()
 /*        printf ("Done!\n"); //Пишем что-нибудь на прощание.*/
     }
 }
+
