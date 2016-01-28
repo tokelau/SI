@@ -28,10 +28,7 @@ void filework (char *filename, float n)
     float m=0;
     float  csr[32];
     int i;
-    for (i=0; i<=31; i++)
-    {
-        csr[i]=0;
-    }
+
     float y[33]; // массив для каждого текста
     for (i=0; i<=32; i++)
         y[i]=0;
@@ -72,7 +69,7 @@ void filework (char *filename, float n)
                 }
         }
         //printf("File processed!\n");
-        //k++;
+        k++;
     }
     m=p[0];//расфасовать согласно базовым данным
     p[0]=p[14];
@@ -124,6 +121,14 @@ for (i=0; i<=32; i++)
        // printf("1\n");
     if (filename[0] != '.') // Игнорируем файлы, которые начинаются с точки
     {
+        k++;
+        printf("%f\n", k);
+            for (i=0; i<=31; i++)
+    {
+        csr[i]=0;
+    }
+        for (i=0; i<=32; i++)
+        y[i]=0;
         //printf("%f/n", n);
         strcpy(newfilename, "C:\\qwer\\");
         strcat(newfilename, filename);
@@ -218,7 +223,7 @@ for (i=0; i<=32; i++)
         }
         for (i=0; i<=31; i++)
         {
-            printf("jj");
+            printf("j");
             //fprintf(qwero1, "f\n");
             csr[i]=csr[i]/n;
            // fprintf(qwero1, "%f\n", csr[i]);
