@@ -16,27 +16,17 @@
 /*  Заклинания
     Создаём переменные, необходимые для работы с библиотеками
 */
-
+int i;
 float p[33];
+float pp[33];
 DIR *dir;
 struct dirent *ent;
+float  csr[32];
 
 /*  Функция, которая обрабатывает файл */
 void filework (char *filename)
 {
-    float m=0;
-    float  csr[32];
-    int i;
-    for (i=0; i<=31; i++)
-    {
-        csr[i]=0;
-    }
-    float n=0;
-    float y[33]; // массив для каждого текста
-    for (i=0; i<=32; i++)
-        y[i]=0;
-    FILE *qwero1;
-    qwero1=fopen("C:\\qwero1.txt", "a");
+    //printf("2\n");
     FILE *qwero;
     qwero=fopen("C:\\qwero.txt", "w");
     fprintf(qwero, "%s\n", "hello");
@@ -55,81 +45,53 @@ void filework (char *filename)
                 p[32]++;//в общий счетчик
                 c-=AP_L;
                 p[c]++;
-                }
-        if (c>=CAPS_L && c<= CAPS_R) /* А-Я */
-        {
-            p[32]++; //в общицй счетчик
-            c-=CAPS_L;
-            p[c]++;
-            //printf("%d\n", p[c]);
+            }
+            if (c>=CAPS_L && c<= CAPS_R) /* А-Я */
+            {
+                p[32]++; //в общицй счетчик
+                c-=CAPS_L;
+                p[c]++;
+                //printf("%d\n", p[c]);
+            }
+            if (c==AP_JO || c==CAPS_JO)
+            {
+                p[32]++;//в общицй счетчик
+                p[5]++;
+                //printf("%d\n", p[c]);
+            }
         }
-                if (c==AP_JO || c==CAPS_JO)
-                {
-                    p[32]++;//в общицй счетчик
-                    p[5]++;
-            //printf("%d\n", p[c]);
-                }
-        }
-        n=n+1;
-        printf("File processed!\n");
+        //printf("File processed!\n");
     }
-    m=p[0];//расфасовать согласно базовым данным
-    p[0]=p[14];
-    p[14]=p[19];
-    p[19]=p[7];
-    p[7]=p[16];
-    p[16]=p[27];
-    p[27]=p[22];
-    p[22]=p[9];
-    p[9]=p[11];
-    p[11]=p[12];
-    p[12]=p[4];
-    p[4]=p[13];
-    p[13]=p[15];
-    p[15]=p[31];
-    p[31]=p[26];
-    p[26]=p[30];
-    p[30]=p[20];
-    p[20]=p[1];
-    p[1]=p[5];
-    p[5]=p[18];
-    p[18]=p[3];
-    p[3]=p[8];
-    p[8]=p[2];
-    p[2]=m;
-        m=p[6];
-    p[6]=p[17];
-    p[17]=p[28];
-    p[28]=p[25];
-    p[25]=p[24];
-    p[24]=m;
-        m=p[21];
-    p[21]=p[23];
-    p[23]=m;
-/*высчитвыаем среднее для кадой буквы*/
-    float pp[32];
-    int j;
-    for (j=0;j<=33;j++)
+    /*высчитвыаем среднее для кадой буквы*/
+    for (i=0;i<=31;i++)
     {
-        pp[j]=p[j]/p[32];
-        fprintf(qwero, "%f\n", pp[j]);
+        pp[i]=p[i]/p[32];
+        fprintf(qwero, "%f\n", pp[i]);
     }
-    /*
-
-
-    ВТОРОЙ ЗАХОД
-
-
-    */
+}
+void TheSecondStep (char *filename, float n)
+{
+    printf("1\n");
+    float y[33];
+    for (i=0; i<=32; i++)
+    {
+        y[i]=0;
+    }
+    float m;
+    FILE *qwero1;
+    qwero1=fopen("C:\\qwero1.txt", "a");
+    char newfilename[80]; //  это для работы с текстовым файлом
+    strcpy(newfilename, "C:\\qwer\\");
+    strcat(newfilename, filename);
+    //printf("File \"%s\" seems to exist...\n", newfilename);
+    int c; // В эту переменную будут писаться символы из файла
+    FILE *ff; // Это переменная для файла
+    ff = fopen (newfilename, "r"); //Открываем файл для чтения
     if (filename[0] != '.') // Игнорируем файлы, которые начинаются с точки
     {
-        strcpy(newfilename, "C:\\qwer\\");
-        strcat(newfilename, filename);
-        //printf("File \"%s\" seems to exist...\n", newfilename);
-        ff = fopen (newfilename, "r"); //Открываем файл для чтения
         while (( c = fgetc ( ff )) != EOF)  // Читаем символы по одному
         {
-           // printf("Oh! A symbol!\n");
+            // printf("Oh! A symbol!\n");
             if (c>=AP_L && c <=AP_R) /* а-я */
             {
                 c-=AP_L;
@@ -152,8 +114,45 @@ void filework (char *filename)
             }
         }
         fclose (ff); // Когда прочитали все символы, закрываем файл
+{ //расфасовать согласно базовым данным
+    m=pp[0];
+    pp[0]=pp[14];
+    pp[14]=pp[19];
+    pp[19]=pp[7];
+    pp[7]=pp[16];
+    pp[16]=pp[27];
+    pp[27]=pp[22];
+    pp[22]=pp[9];
+    pp[9]=pp[11];
+    pp[11]=pp[12];
+    pp[12]=pp[4];
+    pp[4]=pp[13];
+    pp[13]=pp[15];
+    pp[15]=pp[31];
+    pp[31]=pp[26];
+    pp[26]=pp[30];
+    pp[30]=pp[20];
+    pp[20]=pp[1];
+    pp[1]=pp[5];
+    pp[5]=pp[18];
+    pp[18]=pp[3];
+    pp[3]=pp[8];
+    pp[8]=pp[2];
+    pp[2]=m;
+        m=pp[6];
+    pp[6]=pp[17];
+    pp[17]=pp[28];
+    pp[28]=pp[25];
+    pp[25]=pp[24];
+    pp[24]=m;
+        m=pp[21];
+    pp[21]=pp[23];
+    pp[23]=m;
+}
+printf("%f\n", pp[0]);
+//printf("%f\n", pp[1]);
 
-     /*расфасовываем массив, который на один файл*/
+{   /*расфасовываем массив, который на один файл*/
     m=y[0];//расфасовать согласно базовым данным
     y[0]=y[14];
     y[14]=y[19];
@@ -187,63 +186,117 @@ void filework (char *filename)
         m=y[21];
     y[21]=y[23];
     y[23]=m;
-
+}
+    //printf("%f\n", csr[12]/12);
+    for (i=0; i<=31; i++)
+    {
+        if (y[i] !=0)
+        {
+            y[i]=y[i]/y[32];
+        }
+        //printf("avg: %f\n", y[i]);
+    }
     /*среднее квадратичное для каждого файла*/
         for (i=0; i<=31; i++)
         {
-            csr[i]=csr[i]+(y[i]-pp[i])*(y[i]-pp[i]);
-           // printf("avg: %f\n", csr[i]);
+            csr[i]=csr[i]+((y[i]-pp[i])*(y[i]-pp[i]));
+            //printf("avg: %f\n", csr[i]);
         }
+        //printf("%f\n", csr[9]);
         for (i=0; i<=31; i++)
         {
-            fprintf(qwero1, "%f\n", sqrt(y[i]/n));
+            //printf("j");
+            //fprintf(qwero1, "f\n");
+            csr[i]=csr[i]/n;
+            //fprintf(qwero1, "%f\n", csr[i]);
+        }
+        //printf("%f\n", csr[11]);
+        for (i=0; i<=31; i++)
+        {
+            fprintf(qwero1, "%f\n", sqrt(csr[i]));
         }
 
     fprintf(qwero1,"\n");
     fprintf(qwero1, "\n");
 
             fclose(qwero1);
-    } //2
-    //возврат на места
-        m=p[0];
-    p[0]=p[2];
-    p[2]=p[8];
-    p[8]=p[3];
-    p[3]=p[18];
-    p[18]=p[5];
-    p[5]=p[1];
-    p[1]=p[20];
-    p[20]=p[30];
-    p[30]=p[26];
-    p[26]=p[31];
-    p[31]=p[15];
-    p[15]=p[13];
-    p[13]=p[4];
-    p[4]=p[12];
-    p[12]=p[11];
-    p[11]=p[9];
-    p[9]=p[22];
-    p[22]=p[27];
-    p[27]=p[16];
-    p[16]=p[7];
-    p[7]=p[19];
-    p[19]=p[14];
-    p[14]=m;
-        m=p[6];
-        p[6]=p[24];
-        p[24]=p[25];
-        p[25]=p[28];
-        p[28]=p[17];
-        p[17]=m;
-    m=p[21];
-    p[21]=p[23];
-    p[23]=m;
-    //возврат на места
+    {//возврат на места для каждого файла
+    m=y[0];
+    y[0]=y[2];
+    y[2]=y[8];
+    y[8]=y[3];
+    y[3]=y[18];
+    y[18]=y[5];
+    y[5]=y[1];
+    y[1]=y[20];
+    y[20]=y[30];
+    y[30]=y[26];
+    y[26]=y[31];
+    y[31]=y[15];
+    y[15]=y[13];
+    y[13]=y[4];
+    y[4]=y[12];
+    y[12]=y[11];
+    y[11]=y[9];
+    y[9]=y[22];
+    y[22]=y[27];
+    y[27]=y[16];
+    y[16]=y[7];
+    y[7]=y[19];
+    y[19]=y[14];
+    y[14]=m;
+        m=y[6];
+        y[6]=y[24];
+        y[24]=y[25];
+        y[25]=y[28];
+        y[28]=y[17];
+        y[17]=m;
+    m=y[21];
+    y[21]=y[23];
+    y[23]=m;
+    //возврат на места глобальной переменной
+    m=pp[0];
+    pp[0]=pp[2];
+    pp[2]=pp[8];
+    pp[8]=pp[3];
+    pp[3]=pp[18];
+    pp[18]=pp[5];
+    pp[5]=pp[1];
+    pp[1]=pp[20];
+    pp[20]=pp[30];
+    pp[30]=pp[26];
+    pp[26]=pp[31];
+    pp[31]=pp[15];
+    pp[15]=pp[13];
+    pp[13]=pp[4];
+    pp[4]=pp[12];
+    pp[12]=pp[11];
+    pp[11]=pp[9];
+    pp[9]=pp[22];
+    pp[22]=pp[27];
+    pp[27]=pp[16];
+    pp[16]=pp[7];
+    pp[7]=pp[19];
+    pp[19]=pp[14];
+    pp[14]=m;
+        m=pp[6];
+        pp[6]=pp[24];
+        pp[24]=pp[25];
+        pp[25]=pp[28];
+        pp[28]=pp[17];
+        pp[17]=m;
+    m=pp[21];
+    pp[21]=pp[23];
+    pp[23]=m;
+    }
+    }
+
 }
 
 
 void main()
 {
+    float n=0;
     int i;
     for (i=0; i<=32; i++)
     {
@@ -258,12 +311,46 @@ void main()
     {
         while ((ent = readdir (dir)) != NULL) //Читаем следующее имя файла в директории. Оно будет равно NULL, если файлы закончиились.
         {
+            n++;
+        }
+        closedir (dir); //Когда все файлы обработаны, закрываем директорию.
+        //printf ("Done!\n"); //Пишем что-нибудь на прощание.
+    }
+    n=n-2;
+
+    if ((dir = opendir ("C:\\qwer")) == NULL) // Открываем директорию.
+    {
+        printf ("Error while opening directory"); //Если директория не нашлась, пишем сообщение об ошибке.
+        return 1;
+    }
+    else //Если всё хорошо, идём дальше
+    {
+        while ((ent = readdir (dir)) != NULL) //Читаем следующее имя файла в директории. Оно будет равно NULL, если файлы закончиились.
+        {
         /*  *ent).d_name или ent -> d_name это функция, которая возвращает строку, в которой записано имя файла.
             Эту строку мы передаём нашей функции, filework
         */
             filework ((*ent).d_name);
         }
+                closedir (dir); //Когда все файлы обработаны, закрываем директорию.
+        printf ("Done!\n"); //Пишем что-нибудь на прощание.
+    }
+    if ((dir = opendir ("C:\\qwer")) == NULL) // Открываем директорию.
+    {
+        printf ("Error while opening directory"); //Если директория не нашлась, пишем сообщение об ошибке.
+        return 1;
+    }
+    else //Если всё хорошо, идём дальше
+    {
+        while ((ent = readdir (dir)) != NULL) //Читаем следующее имя файла в директории. Оно будет равно NULL, если файлы закончиились.
+        {
+        /*  *ent).d_name или ent -> d_name это функция, которая возвращает строку, в которой записано имя файла.
+            Эту строку мы передаём нашей функции, filework
+        */
+            TheSecondStep((*ent).d_name, n);
+        }
         closedir (dir); //Когда все файлы обработаны, закрываем директорию.
-/*        printf ("Done!\n"); //Пишем что-нибудь на прощание.*/
+        printf ("Done!\n"); //Пишем что-нибудь на прощание.
     }
 }
+
