@@ -66,7 +66,7 @@ void filework (char *filename)
     for (i=0;i<=31;i++)
     {
         pp[i]=p[i]/p[32];
-        //printf("%f\n", pp[i]);
+        fprintf(qwero, "%f\n", pp[i]);
     }
 }
 void TheSecondStep (char *filename, float n)
@@ -77,9 +77,9 @@ void TheSecondStep (char *filename, float n)
     {
         y[i]=0;
     }
-    float m=0;
+    float m;
     FILE *qwero1;
-    qwero1=fopen("D:\\qwero1.txt", "a");
+    qwero1=fopen("C:\\qwero1.txt", "a");
     char newfilename[80]; //  это для работы с текстовым файлом
     strcpy(newfilename, "C:\\qwer\\");
     strcat(newfilename, filename);
@@ -149,6 +149,9 @@ void TheSecondStep (char *filename, float n)
     pp[21]=pp[23];
     pp[23]=m;
 }
+printf("%f\n", pp[0]);
+//printf("%f\n", pp[1]);
+
 {   /*расфасовываем массив, который на один файл*/
     m=y[0];//расфасовать согласно базовым данным
     y[0]=y[14];
@@ -184,7 +187,6 @@ void TheSecondStep (char *filename, float n)
     y[21]=y[23];
     y[23]=m;
 }
-
     //printf("%f\n", csr[12]/12);
     for (i=0; i<=31; i++)
     {
@@ -206,7 +208,7 @@ void TheSecondStep (char *filename, float n)
             //printf("j");
             //fprintf(qwero1, "f\n");
             csr[i]=csr[i]/n;
-           //fprintf(qwero1, "%f\n", csr[i]);
+            //fprintf(qwero1, "%f\n", csr[i]);
         }
         //printf("%f\n", csr[11]);
         for (i=0; i<=31; i++)
@@ -253,7 +255,7 @@ void TheSecondStep (char *filename, float n)
     y[21]=y[23];
     y[23]=m;
     //возврат на места глобальной переменной
-    m=y[0];
+    m=pp[0];
     pp[0]=pp[2];
     pp[2]=pp[8];
     pp[8]=pp[3];
@@ -351,3 +353,4 @@ void main()
         printf ("Done!\n"); //Пишем что-нибудь на прощание.
     }
 }
+
